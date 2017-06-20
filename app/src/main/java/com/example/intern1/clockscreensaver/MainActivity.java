@@ -3,15 +3,14 @@ package com.example.intern1.clockscreensaver;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
+
+/**
+ * Created by eyalgofer on 6/20/17.
+ */
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,11 +31,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Hide the status bar.
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+
+        // find views
         mDotCircleProgress = (DotCircleProgress)findViewById(R.id.dots);
         mTime = (TextView)findViewById(R.id.time);
         mDate = (TextView)findViewById(R.id.date);
 
-        // on ui thread
+        // set repeating Runnable on the UI thread
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
